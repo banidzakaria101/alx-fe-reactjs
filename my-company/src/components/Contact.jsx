@@ -1,5 +1,5 @@
 function Contact() {
-  const [formatData, setFormatData] = useSatte({
+  const [formatData, setFormatData] = useSate({
     name: "",
     email: "",
     message: "",
