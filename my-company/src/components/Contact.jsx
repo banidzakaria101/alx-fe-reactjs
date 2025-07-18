@@ -1,37 +1,47 @@
+import { useState } from 'react';
+
 function Contact() {
-  const [formatData, setFormatData] = useSate({
-    name: "",
-    email: "",
-    message: "",
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
   });
 
   const handleChange = (e) => {
-    setFormatData({ ...FormData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmite = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    alert("From submitted!");
+    alert('Form submitted!');
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: '20px' }}>
       <h1>Contact Us</h1>
-      <form onSubmit={handleSubmite}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="name"
           placeholder="Your Name"
-          value={FormData.name}
+          value={formData.name}
           onChange={handleChange}
-          style={{ display: "block", margin: "10px 0" }}
+          style={{ display: 'block', margin: '10px 0' }}
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          value={formData.email}
+          onChange={handleChange}
+          style={{ display: 'block', margin: '10px 0' }}
         />
         <textarea
           name="message"
-          placeholder="Your Massage"
-          value={formatData.message}
+          placeholder="Your Message"
+          value={formData.message}
           onChange={handleChange}
-          style={{ display: "block", marging: "10px 0" }}
+          style={{ display: 'block', margin: '10px 0' }}
         />
         <button type="submit">Send Message</button>
       </form>
