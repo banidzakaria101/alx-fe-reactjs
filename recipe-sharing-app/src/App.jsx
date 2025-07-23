@@ -12,7 +12,7 @@ function App() {
         <RecipeList />
       </div>
       <div>
-        <AddRecipe />
+        <AddRecipeForm />
       </div>
     </>
   );
