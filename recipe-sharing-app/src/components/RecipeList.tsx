@@ -1,4 +1,4 @@
-import useRecipeStore from './recipeStore';
+import useRecipeStore from '../assets/recipeStore';
 
 
 const RecipeList = () => {
