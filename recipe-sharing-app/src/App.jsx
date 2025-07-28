@@ -1,38 +1,31 @@
-import { useState } from "react";
-import "./App.css";
-import RecipeList from "./components/RecipeList";
-import AddRecipeForm from "./components/AddRecipeForm";
-import { BrowserRouter, Routes } from "react-router-dom";
-import { Route, Link } from "react-router-dom";
-import RecipeDetails from "./components/RecipeDetails";
-import EditRecipeForm from "./components/EditRecipeForm";
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import RecipeList from './components/RecipeList';
+import AddRecipeForm from './components/AddRecipeForm';
+import RecipeDetails from './components/RecipeDetails';
+import SearchBar from './components/SearchBar';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <BrowserRouter>
-        <nav>
-          <Link to="/">AllRecipes</Link>
-          <Link to="/add">Add Recipe</Link>
-        </nav>
-
-        <Routes>
-          <Route path="/" element={<RecipeList />} />
-          <Route
-            path="/add"
-            element={
-              <>
-                <AddRecipeForm />
-                <RecipeList />
-              </>
-            }
-          />
-          <Route path="/recipe/id" element={<RecipeDetails />}/>
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <nav>
+        <Link to="/">All Recipes</Link>
+        <Link to="/add">Add Recipe</Link>
+      </nav>
+      <SearchBar /> 
+      <Routes>
+        <Route path="/" element={<RecipeList />} />
+        <Route
+          path="/add"
+          element={
+            <>
+              <AddRecipeForm />
+              <RecipeList />
+            </>
+          }
+        />
+        <Route path="/recipe/:id" element={<RecipeDetails />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
