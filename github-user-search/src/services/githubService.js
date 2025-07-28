@@ -13,3 +13,12 @@ const api = axios.create({
 export function getUser(query){
   return api.get('/search/users', { params: { q:query}})
 }
+
+export async function fetchUserData(username) {
+  try {
+    const response = await api.get(`/users/${username}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error fetching user data');
+  }
+}
