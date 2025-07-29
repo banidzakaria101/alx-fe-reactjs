@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { searchUsers } from '../services/githubService';
+import { searchUsers, fetchUserData } from '../services/githubService';
 
 function Search() {
   const [form, setForm] = useState({ username: '', location: '', minRepos: '' });
@@ -80,7 +80,7 @@ function Search() {
       {loading && <p className="mt-4 text-gray-600">Loading...</p>}
       {error && <p className="mt-4 text-red-500">{error}</p>}
 
-      {/* Inside return, replace result display with this */}
+      
 <div className="grid md:grid-cols-2 gap-4 mt-6">
   {results.map(user => (
     <div key={user.id} className="bg-white rounded-xl shadow p-4 flex items-center hover:shadow-md transition">
