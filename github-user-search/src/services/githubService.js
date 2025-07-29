@@ -1,24 +1,30 @@
 import axios from 'axios';
 
-const tpoken = import.meta.env.VITE_GITHUB_API_KEY;
+const api = axios.create({ baseURL: 'https://api.github.com' });
 
-const api = axios.create({
-  baseURL: 'https://api.github.com',
-  headers: token ? {
-    Authorisation: `Barear ${token}`
-  }
-  : undefined,
-});
+export async function searchUsers({ username, location, minRepos }, page = 1) {
+  let query = `${username} in:login type:user`;
+  if (location) query += ` location:${location}`;
+  if (minRepos) query += ` repos:>=${minRepos}`;
 
-export function getUser(query){
-  return api.get('/search/users', { params: { q:query}})
-}
+  const res = await api.get('/search/users', {
+    params: {
+      q: query,
+      per_page: 10,
+      page,
+    },
+  });
 
-export async function fetchUserData(username) {
-  try {
-    const response = await api.get(`/users/${username}`);
-    return response.data;
-  } catch (error) {
-    throw new Error('Error fetching user data');
-  }
+  const users = res.data.items;
+
+  const detailedUsers = await Promise.all(
+    users.map(u =>
+      api.get(`/users/${u.login}`).then(r => r.data).catch(() => null)
+    )
+  );
+
+  return {
+    users: detailedUsers.filter(Boolean),
+    hasMore: res.data.total_count > page * 10,
+  };
 }
