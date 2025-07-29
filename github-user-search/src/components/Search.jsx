@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { searchUsers, fetchUserData } from '../services/githubService';
+import { searchUsers, fetchUserData } from '../services/githubService'; 
 
 function Search() {
   const [form, setForm] = useState({
@@ -14,7 +14,7 @@ function Search() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -38,10 +38,13 @@ function Search() {
 
     try {
       const data = await searchUsers(form, pageToSearch);
+      if (data.users.length === 0) {
+        setError('Looks like we cant find the user');
+      }
       setResults((prev) => (reset ? data.users : [...prev, ...data.users]));
       setHasMore(data.hasMore);
     } catch {
-      setError('Failed to fetch users.');
+      setError('Looks like we cant find the user');
     } finally {
       setLoading(false);
     }
