@@ -1,3 +1,5 @@
+// src/components/AddRecipeForm.jsx
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,23 +13,27 @@ const AddRecipeForm = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Perform validation
+  const validateForm = () => {
     const newErrors = {};
     if (!title.trim()) newErrors.title = 'Title is required.';
     if (!summary.trim()) newErrors.summary = 'Summary is required.';
     if (!image.trim()) newErrors.image = 'Image URL is required.';
     if (!ingredients.trim()) newErrors.ingredients = 'Ingredients are required.';
     if (!preparationSteps.trim()) newErrors.preparationSteps = 'Preparation steps are required.';
+    return newErrors;
+  };
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const validationErrors = validateForm();
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) {
+      return; 
     }
 
-    // Handle form submission logic here
+    // Handle form submission logic
     console.log({
       title,
       summary,
