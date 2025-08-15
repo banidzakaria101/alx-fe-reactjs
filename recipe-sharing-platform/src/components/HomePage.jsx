@@ -27,7 +27,16 @@ const HomePage = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold text-center my-8 text-gray-800">Recipe Gallery</h1>
+       <div className="flex justify-between items-center my-8">
+        <h1 className="text-4xl font-bold text-gray-800">Recipe Gallery</h1>
+        <Link
+          to="/add-recipe"
+          className="bg-green-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-700 transition-colors"
+        >
+          Add New Recipe
+        </Link>
+      </div>
+      
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {recipes.map(recipe => (
           <div
@@ -43,7 +52,7 @@ const HomePage = () => {
               <h2 className="text-xl font-semibold text-gray-900 mb-2">{recipe.title}</h2>
               <p className="text-gray-600 text-sm">{recipe.summary}</p>
               <Link
-                to={`/recipe/${recipe.id}`} // Use Link with dynamic ID
+                to={`/recipe/${recipe.id}`} 
                 className="block text-center mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors"
               >
                 View Recipe
