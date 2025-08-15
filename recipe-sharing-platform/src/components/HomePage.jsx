@@ -1,6 +1,7 @@
 // src/components/HomePage.jsx
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Import Link
 import recipesData from '../data.json';
 
 // Import local images directly
@@ -41,11 +42,12 @@ const HomePage = () => {
             <div className="p-5">
               <h2 className="text-xl font-semibold text-gray-900 mb-2">{recipe.title}</h2>
               <p className="text-gray-600 text-sm">{recipe.summary}</p>
-              <button
-                className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              <Link
+                to={`/recipe/${recipe.id}`} // Use Link with dynamic ID
+                className="block text-center mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors"
               >
                 View Recipe
-              </button>
+              </Link>
             </div>
           </div>
         ))}
