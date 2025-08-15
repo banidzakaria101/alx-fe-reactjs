@@ -6,7 +6,7 @@ const AddRecipeForm = () => {
   const [summary, setSummary] = useState('');
   const [image, setImage] = useState('');
   const [ingredients, setIngredients] = useState('');
-  const [instructions, setInstructions] = useState('');
+  const [preparationSteps, setPreparationSteps] = useState('');
   const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
@@ -20,32 +20,30 @@ const AddRecipeForm = () => {
     if (!summary.trim()) newErrors.summary = 'Summary is required.';
     if (!image.trim()) newErrors.image = 'Image URL is required.';
     if (!ingredients.trim()) newErrors.ingredients = 'Ingredients are required.';
-    if (!instructions.trim()) newErrors.instructions = 'Instructions are required.';
+    if (!preparationSteps.trim()) newErrors.preparationSteps = 'Preparation steps are required.';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
-    // Handle form submission logic
+    // Handle form submission logic here
     console.log({
       title,
       summary,
       image,
       ingredients: ingredients.split('\n').filter(item => item.trim()),
-      instructions: instructions.split('\n').filter(item => item.trim()),
+      preparationSteps: preparationSteps.split('\n').filter(item => item.trim()),
     });
 
-    // Clear form and show success message
     alert('Recipe submitted successfully!');
     setTitle('');
     setSummary('');
     setImage('');
     setIngredients('');
-    setInstructions('');
+    setPreparationSteps('');
     setErrors({});
     
-    // Redirect to the home page
     navigate('/');
   };
 
@@ -103,15 +101,15 @@ const AddRecipeForm = () => {
           </div>
 
           <div>
-            <label htmlFor="instructions" className="block text-sm font-medium text-gray-700">Instructions (one step per line)</label>
+            <label htmlFor="preparationSteps" className="block text-sm font-medium text-gray-700">Preparation Steps (one per line)</label>
             <textarea
-              id="instructions"
+              id="preparationSteps"
               rows="4"
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
-              className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${errors.instructions ? 'border-red-500' : 'border-gray-300'}`}
+              value={preparationSteps}
+              onChange={(e) => setPreparationSteps(e.target.value)}
+              className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${errors.preparationSteps ? 'border-red-500' : 'border-gray-300'}`}
             ></textarea>
-            {errors.instructions && <p className="mt-1 text-sm text-red-500">{errors.instructions}</p>}
+            {errors.preparationSteps && <p className="mt-1 text-sm text-red-500">{errors.preparationSteps}</p>}
           </div>
 
           <div className="flex justify-end">
