@@ -1,26 +1,20 @@
-import { useState } from "react";
-import PostsComponent from "./components/PostsComponent.jsx";
+import React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import PostsComponent from "./components/PostsComponent";
 
-function About() {
+const queryClient = new QueryClient();
+
+function App() {
   return (
-    <div style={{ maxWidth: 900, margin: "2rem auto", padding: "1rem" }}>
-      <h1>About</h1>
-      <p>Navigate back to “Posts” to see cached data load instantly (within staleTime).</p>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="min-h-screen bg-gray-100 p-6">
+        <h1 className="text-3xl font-bold text-center mb-6 text-blue-600">
+          React Query Demo - Posts
+        </h1>
+        <PostsComponent />
+      </div>
+    </QueryClientProvider>
   );
 }
 
-export default function App() {
-  const [page, setPage] = useState("posts");
-
-  return (
-    <div>
-      <nav style={{ display: "flex", gap: ".5rem", padding: "1rem", borderBottom: "1px solid #eee" }}>
-        <button onClick={() => setPage("posts")}>Posts</button>
-        <button onClick={() => setPage("about")}>About</button>
-      </nav>
-
-      {page === "posts" ? <PostsComponent /> : <About />}
-    </div>
-  );
-}
+export default App;
