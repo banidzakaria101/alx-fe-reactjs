@@ -7,10 +7,8 @@ import ProfileSettings from "./components/ProfileSettings.jsx";
 import BlogPost from "./components/BlogPost.jsx";
 import Login from "./components/Login.jsx";
 
-// Simulate authentication
 const isAuthenticated = () => localStorage.getItem("auth") === "true";
 
-// Protected route component
 const ProtectedRoute = ({ children }) => {
   if (!isAuthenticated()) return <Navigate to="/login" replace />;
   return children;
