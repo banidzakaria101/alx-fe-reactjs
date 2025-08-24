@@ -1,8 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import TodoList from "../components/TodoList.jsx";
 
-describe("TodoList Component", () => {
+describe("TodoList Component Tests", () => {
   test("renders initial todos", () => {
     render(<TodoList />);
     expect(screen.getByText("Learn React")).toBeInTheDocument();
@@ -14,24 +13,27 @@ describe("TodoList Component", () => {
     const input = screen.getByTestId("todo-input");
     const addButton = screen.getByText("Add");
 
-    fireEvent.change(input, { target: { value: "New Todo" } });
+    fireEvent.change(input, { target: { value: "Test Todo" } });
     fireEvent.click(addButton);
 
-    expect(screen.getByText("New Todo")).toBeInTheDocument();
+    expect(screen.getByText("Test Todo")).toBeInTheDocument();
   });
 
   test("toggles todo completion", () => {
     render(<TodoList />);
     const todo = screen.getByText("Learn React");
 
+    // Initially not completed
     expect(todo).not.toHaveStyle("text-decoration: line-through");
+
+    // Toggle completion
     fireEvent.click(todo);
     expect(todo).toHaveStyle("text-decoration: line-through");
   });
 
   test("deletes a todo", () => {
     render(<TodoList />);
-    const deleteButton = screen.getByTestId("delete-1");
+    const deleteButton = screen.getByTestId("delete-1"); // Delete first todo
 
     fireEvent.click(deleteButton);
     expect(screen.queryByText("Learn React")).not.toBeInTheDocument();

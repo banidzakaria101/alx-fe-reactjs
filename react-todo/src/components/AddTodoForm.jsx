@@ -13,12 +13,9 @@ export default function AddTodoForm({ addTodo }) {
   return (
     <form onSubmit={handleSubmit} className="mb-4">
       <input
-        type="text"
-        placeholder="Add new todo"
+        data-testid="todo-input"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        data-testid="todo-input"
-        className="border rounded p-1 mr-2"
       />
       <button type="submit" className="bg-blue-500 text-white px-2 rounded">
         Add

@@ -25,7 +25,7 @@ export default function TodoList() {
   };
 
   return (
-    <div>
+    <div className="max-w-md mx-auto p-4 bg-gray-100 rounded shadow mt-10">
       <h1 className="text-2xl font-bold mb-4">Todo List</h1>
       <AddTodoForm addTodo={addTodo} />
       <ul>
@@ -33,20 +33,19 @@ export default function TodoList() {
           <li
             key={todo.id}
             onClick={() => toggleTodo(todo.id)}
+            data-testid={`todo-${todo.id}`}
             style={{
               textDecoration: todo.completed ? "line-through" : "none",
               cursor: "pointer",
             }}
-            data-testid={`todo-${todo.id}`}
           >
-            {todo.text}{" "}
+            {todo.text}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 deleteTodo(todo.id);
               }}
               data-testid={`delete-${todo.id}`}
-              className="ml-2 text-red-600"
             >
               Delete
             </button>
