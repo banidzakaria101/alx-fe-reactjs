@@ -1,4 +1,6 @@
-import { Link, Outlet } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
+import ProfileDetails from "./ProfileDetails.jsx";
+import ProfileSettings from "./ProfileSettings.jsx";
 
 export default function Profile() {
   return (
@@ -7,12 +9,19 @@ export default function Profile() {
 
       {/* Navigation for nested routes */}
       <nav className="flex gap-4 mb-4">
-        <Link className="text-blue-600 hover:underline" to="details">Details</Link>
-        <Link className="text-blue-600 hover:underline" to="settings">Settings</Link>
+        <Link className="text-blue-600 hover:underline" to="details">
+          Details
+        </Link>
+        <Link className="text-blue-600 hover:underline" to="settings">
+          Settings
+        </Link>
       </nav>
 
-      {/* Nested route placeholder */}
-      <Outlet />
+      {/* Nested Routes */}
+      <Routes>
+        <Route path="details" element={<ProfileDetails />} />
+        <Route path="settings" element={<ProfileSettings />} />
+      </Routes>
     </div>
   );
 }
