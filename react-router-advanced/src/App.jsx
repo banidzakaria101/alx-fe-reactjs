@@ -6,13 +6,11 @@ import ProfileDetails from "./components/ProfileDetails.jsx";
 import ProfileSettings from "./components/ProfileSettings.jsx";
 import BlogPost from "./components/BlogPost.jsx";
 import Login from "./components/Login.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+
 
 const isAuthenticated = () => localStorage.getItem("auth") === "true";
 
-const ProtectedRoute = ({ children }) => {
-  if (!isAuthenticated()) return <Navigate to="/login" replace />;
-  return children;
-};
 
 export default function App() {
   return (
